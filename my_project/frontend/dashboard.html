@@ -2,30 +2,71 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>User Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard - Smart Planter</title>
   <style>
-    body { font-family: sans-serif; padding: 40px; background: #f9f9f9; }
-    h1 { color: #4CAF50; }
-    .logout { background: #f44336; color: #fff; padding: 10px 20px; border: none; cursor: pointer; }
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f4f7;
+      margin: 0;
+      padding: 20px;
+    }
+    header {
+      background: #4CAF50;
+      color: white;
+      padding: 15px;
+      text-align: center;
+      border-radius: 5px;
+    }
+    .sensor-section {
+      margin-top: 20px;
+      padding: 20px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.05);
+    }
+    .sensor-section h3 {
+      margin-top: 0;
+      color: #333;
+    }
+    .logout-btn {
+      float: right;
+      background: #f44336;
+      border: none;
+      padding: 8px 14px;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+    }
   </style>
 </head>
 <body>
-  <h1 id="welcome">Welcome!</h1>
-  <button class="logout" onclick="logout()">Logout</button>
+  <header>
+    <button class="logout-btn" onclick="logout()">Logout</button>
+    <h2 id="welcome">Welcome!</h2>
+  </header>
 
-  <script>
-    const userId = localStorage.getItem('user_id');
-    if (!userId) {
-      alert('You must log in first!');
-      window.location.href = '/auth.html';
-    } else {
-      document.getElementById('welcome').textContent = `Welcome, User #${userId}!`;
-    }
+  <div class="sensor-section">
+    <h3>Light Intensity</h3>
+    <div id="light-data">Loading...</div>
+  </div>
 
-    function logout() {
-      localStorage.removeItem('user_id');
-      window.location.href = '/auth.html';
-    }
-  </script>
+  <div class="sensor-section">
+    <h3>Air Humidity</h3>
+    <div id="air-humidity-data">Loading...</div>
+  </div>
+
+  <div class="sensor-section">
+    <h3>Air Temperature</h3>
+    <div id="air-temp-data">Loading...</div>
+  </div>
+
+  <div class="sensor-section">
+    <h3>Soil Moisture</h3>
+    <div id="soil-moisture-data">Loading...</div>
+  </div>
+
+  <script src="js/dashboard.js"></script>
 </body>
 </html>
