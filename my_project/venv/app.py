@@ -197,6 +197,26 @@ def user_data():
     conn.close()
     return jsonify(users), 200
 
+@app.route('/login', methods=['POST'])
+def login():
+    data = request.json
+    username = data.get('username')
+    password = data.get('password')
+
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+
+    cursor.execute("SELECT * FROM users WHERE username = %s AND password = %s", (username, password))
+    user = cursor.fetchone()
+
+    cursor.close()
+    conn.close()
+
+    if user:
+        return jsonify({'status': 'success', 'message': 'Login successful', 'user_id': user['user_id']}), 200
+    else:
+        return jsonify({'status': 'error', 'message': 'Invalid username or password'}), 401
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
