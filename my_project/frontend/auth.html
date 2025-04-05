@@ -68,49 +68,6 @@
     <div class="switch" onclick="toggleForm()">Already have an account? Login</div>
   </div>
 
-  <script>
-    let isRegistering = true;
-
-    function toggleForm() {
-      isRegistering = !isRegistering;
-      document.getElementById("form-title").textContent = isRegistering ? "Register" : "Login";
-      document.getElementById("email").style.display = isRegistering ? "block" : "none";
-      document.querySelector(".switch").textContent = isRegistering
-        ? "Already have an account? Login"
-        : "Don't have an account? Register";
-    }
-
-    document.getElementById("auth-form").addEventListener("submit", function (e) {
-      e.preventDefault();
-
-      const username = document.getElementById("username").value;
-      const password = document.getElementById("password").value;
-      const email = document.getElementById("email").value;
-
-      const payload = isRegistering
-        ? { username, password, email }
-        : { username, password };
-
-      const endpoint = isRegistering ? "/user" : "/login";
-
-      fetch(endpoint, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-      })
-        .then(res => res.json())
-        .then(data => {
-          if (data.status === "success") {
-            alert("✅ " + data.message);
-          } else {
-            alert("❌ " + (data.message || "Failed"));
-          }
-        })
-        .catch(err => {
-          console.error(err);
-          alert("Something went wrong.");
-        });
-    });
-  </script>
+  <script src="js/auth.js"></script>
 </body>
 </html>

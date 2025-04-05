@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>User Dashboard</title>
+  <style>
+    body { font-family: sans-serif; padding: 40px; background: #f9f9f9; }
+    h1 { color: #4CAF50; }
+    .logout { background: #f44336; color: #fff; padding: 10px 20px; border: none; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h1 id="welcome">Welcome!</h1>
+  <button class="logout" onclick="logout()">Logout</button>
+
+  <script>
+    const userId = localStorage.getItem('user_id');
+    if (!userId) {
+      alert('You must log in first!');
+      window.location.href = '/auth.html';
+    } else {
+      document.getElementById('welcome').textContent = `Welcome, User #${userId}!`;
+    }
+
+    function logout() {
+      localStorage.removeItem('user_id');
+      window.location.href = '/auth.html';
+    }
+  </script>
+</body>
+</html>
